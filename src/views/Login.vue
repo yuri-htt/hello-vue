@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h3>登録</h3>
+    <h3>ログイン</h3>
     <label for="email">Email：</label>
     <input id="email" type="text" v-model="email" />
 
@@ -13,7 +13,7 @@
     <br />
     <br />
 
-    <button @click="register">送信</button>
+    <button @click="login">送信</button>
 
   </div>
 </template>
@@ -29,8 +29,8 @@ export default {
     };
   },
   methods: {
-    register() {
-      this.$store.dispatch('register', {
+    login() {
+      this.$store.dispatch('login', {
         email: this.email,
         password: this.password,
       });
@@ -40,3 +40,13 @@ export default {
   },
 };
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+</style>
