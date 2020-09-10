@@ -14,6 +14,14 @@
     <br />
 
     <button @click="createComment">送信</button>
+
+    <h2>掲示板</h2>
+    <div v-for="post in posts" :key="post.name">
+      <br>
+      <div>名前：{{ post.fields.name.stringValue }}</div>
+      <div>コメント：{{ post.fields.comment.stringValue }}</div>
+    </div>
+
   </div>
 </template>
 
@@ -26,7 +34,16 @@ export default {
     return {
       name: '',
       comment: '',
+      posts: [],
     };
+  },
+  created() {
+    axios.get(
+      '/comments',
+    ).then((response) => {
+      this.posts = response.data.documents;
+      console.log(response);
+    });
   },
   methods: {
     createComment() {
@@ -37,7 +54,7 @@ export default {
 
       axios
         .post(
-          'https://firestore.googleapis.com/v1/projects/vuejs-http-sample/databases/(default)/documents/comments',
+          '/comments',
           {
             fields: {
               name: { stringValue: this.name },
